@@ -1,0 +1,13 @@
+.orderSummary {
+    font-size: 1.2rem;
+}
+
+.orderSummary ul {
+    list-style-type: none;
+    text-transform: capitalize;
+    font-size: 1.1rem;
+}
+
+.orderSummary p {
+    margin: 0;
+}
