@@ -20,7 +20,7 @@ class SandwichBuilder extends Component {
   state = {
     ingredients: {
       //   8 ingredient types
-      friedEgg: 0,
+      friedEgg: 2,
       tomato: 0,
       pickle: 0,
       lettuce: 0,
@@ -29,7 +29,7 @@ class SandwichBuilder extends Component {
       cheese: 0,
       turkey: 0
     },
-    totalPrice: 4,
+    totalPrice: 5,
     purchasable: true,
     purchasing: false
   };
