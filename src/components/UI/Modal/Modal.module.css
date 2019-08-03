@@ -16,7 +16,7 @@
 
 @media (min-width: 600px) {
     .modal {
-        width: 500px;
+        width: 650px;
         /* height: 600px; */
         left: calc(50% - 250px);
         top: 82%;

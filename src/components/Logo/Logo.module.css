@@ -1,0 +1,11 @@
+.logo {
+    height: 64%;
+    background: white;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.logo img {
+    height: 100%;
+    /* border: 1px solid red; */
+}
