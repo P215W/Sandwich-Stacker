@@ -4,7 +4,7 @@ import LogoImage from "../../assets/LogoImage.PNG";
 
 const logo = props => {
   return (
-    <div className={styles.logo}>
+    <div className={styles.logo} style={ {height: props.height} }>
         <img src={LogoImage} alt="SandwichStacker"/>
     </div>
   );

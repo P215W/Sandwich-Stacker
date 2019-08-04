@@ -3,7 +3,6 @@ import styles from "./OrderSummary.module.css";
 import Button from "../../Button/Button";
 
 const orderSummary = props => {
-
     return (
         <div className={styles.orderSummary}>
             <p><strong>Your order</strong></p>
@@ -17,7 +16,6 @@ const orderSummary = props => {
             <p>Proceed to checkout?</p>
             <Button btnType="success" clicked={props.backdropHandler}>Continue</Button>
             <Button btnType="danger" clicked={props.backdropHandler}>Cancel</Button>
-
         </div>
     );
 };
