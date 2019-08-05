@@ -14,8 +14,10 @@ const orderSummary = props => {
             </ul>
             <p>Total price: {props.totalPrice.toFixed(2)}</p>
             <p>Proceed to checkout?</p>
-            <Button btnType="success" clicked={props.backdropHandler}>Continue</Button>
-            <Button btnType="danger" clicked={props.backdropHandler}>Cancel</Button>
+            <div className={styles.buttons}>
+                <Button btnType="success" clicked={props.backdropHandler}>Continue</Button>
+                <Button btnType="danger" clicked={props.backdropHandler}>Cancel</Button>
+            </div>
         </div>
     );
 };

@@ -8,12 +8,14 @@
     padding: 10px;
     margin: 10px;
     font-weight: bold;
+    /* added for mobile  */
+    /* display: block; */
 }
 
-.button:first-of-type {
+/* .button:first-of-type {
     margin-left: 0;
     padding-left: 0;
-}
+} */
 
 .success {
     color: #5C9210;

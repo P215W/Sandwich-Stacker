@@ -23,13 +23,13 @@ class SandwichBuilder extends Component {
       friedEgg: 0,
       tomato: 0,
       pickle: 0,
-      lettuce: 0,
-      cucumber: 0,
-      bacon: 0,
-      cheese: 0,
-      turkey: 0
+      lettuce: 1,
+      cucumber: 1,
+      bacon: 1,
+      cheese: 1,
+      turkey: 1
     },
-    totalPrice: 4,
+    totalPrice: 8,
     purchasable: true,
     purchasing: false
   };
