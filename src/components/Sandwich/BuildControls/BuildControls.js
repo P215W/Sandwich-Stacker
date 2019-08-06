@@ -5,7 +5,7 @@ import BuildControl from "./BuildControl/BuildControl";
 const buildControls = props => {
   // till here: download css files for BuildControlS + BuildControl and paste it in
   const controls = [
-    { label: "Fried Egg", type: "friedEgg" },
+    { label: "FriedEgg", type: "friedEgg" },
     { label: "Tomato", type: "tomato" },
     { label: "Pickle", type: "pickle" },
     { label: "Lettuce", type: "lettuce" },

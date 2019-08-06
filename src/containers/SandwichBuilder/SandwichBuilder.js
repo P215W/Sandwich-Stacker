@@ -4,6 +4,7 @@ import Sandwich from "../../components/Sandwich/Sandwich";
 import BuildControls from "../../components/Sandwich/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
 import OrderSummary from "../../components/Sandwich/OrderSummary/OrderSummary";
+import styles from "./SandwichBuilder.module.css";
 
 const INGREDIENT_PRICE = {
   friedEgg: 0.5,
@@ -35,14 +36,13 @@ class SandwichBuilder extends Component {
   };
 
   checkPurchasability = updIngredients => {
-    const sum = Object.values(updIngredients)
-      .reduce((acc, curr) => {
-        return acc + curr;
-      }, 0);
+    const sum = Object.values(updIngredients).reduce((acc, curr) => {
+      return acc + curr;
+    }, 0);
     this.setState({
       purchasable: sum > 0
-    })
-  }
+    });
+  };
 
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type]; // for updating an ingredient count
@@ -86,17 +86,16 @@ class SandwichBuilder extends Component {
   };
 
   purchasingHandler = () => {
-    this.setState({purchasing: true});
+    this.setState({ purchasing: true });
   };
 
   backdropHandler = () => {
-    this.setState({purchasing: false});
+    this.setState({ purchasing: false });
   };
 
   render() {
     const disabledInfo = {
-      // for disabling a "Less"-btn if a quant. is less than zero
-      ...this.state.ingredients
+      ...this.state.ingredients    // for disabling a "Less"-btn if a quant. is less than zero
     };
     for (let ing in disabledInfo) {
       disabledInfo[ing] = disabledInfo[ing] <= 0;
@@ -104,18 +103,27 @@ class SandwichBuilder extends Component {
 
     return (
       <Auxiliary>
-        <Modal purchasing={this.state.purchasing} backdropHandler={this.backdropHandler}>
-          <OrderSummary ingredients={this.state.ingredients} backdropHandler={this.backdropHandler} totalPrice={this.state.totalPrice} />
+        <Modal
+          purchasing={this.state.purchasing}
+          backdropHandler={this.backdropHandler}
+        >
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            backdropHandler={this.backdropHandler}
+            totalPrice={this.state.totalPrice}
+          />
         </Modal>
-        <Sandwich ingredients={this.state.ingredients} />
-        <BuildControls
-          price={this.state.totalPrice}
-          addIngredient={this.addIngredientHandler}
-          removeIngredient={this.removeIngredientHandler}
-          isDisabled={disabledInfo}
-          purchasable={this.state.purchasable}
-          purchasing={this.purchasingHandler}
-        />
+        <div className={styles.main}>
+          <Sandwich ingredients={this.state.ingredients} />
+          <BuildControls
+            price={this.state.totalPrice}
+            addIngredient={this.addIngredientHandler}
+            removeIngredient={this.removeIngredientHandler}
+            isDisabled={disabledInfo}
+            purchasable={this.state.purchasable}
+            purchasing={this.purchasingHandler}
+          />
+        </div>
       </Auxiliary>
     );
   }

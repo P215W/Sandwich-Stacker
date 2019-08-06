@@ -1,7 +1,6 @@
 .buildControls {
-    /* width: 100%;     */
     width: 90%;
-    /* background: #CF8F2E; */
+    /* background: #CF8F2E; old brownish */
     border: 1px solid #ccc;
     box-shadow: 3px 3px 3px -3px #999, -3px 3px 3px -3px #999, 3px 3px 3px -3px #999;
     display: flex;
@@ -54,5 +53,17 @@
     }
     100% {
         transform: scale(1);
+    }
+}
+
+@media (min-width: 500px) {
+    .buildControls {
+        width: 50%;
+    }
+}
+
+@media (min-width: 700px) {
+    .buildControls {
+        width: 40%;
     }
 }
