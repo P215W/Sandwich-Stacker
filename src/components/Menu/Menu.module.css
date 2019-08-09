@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.menu div {
+.menubar {
     width: 90%;
     height: 3px;
     background-color: white;

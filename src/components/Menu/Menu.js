@@ -3,9 +3,9 @@ import styles from "./Menu.module.css";
 
 const menu = props => (
     <div onClick={props.clicked} className={styles.menu}>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div className="menubar"></div>
+        <div className="menubar"></div>
+        <div className="menubar"></div>
     </div>
 );
 
