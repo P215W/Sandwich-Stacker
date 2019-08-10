@@ -4,7 +4,7 @@
     margin: 10px 0;
     box-sizing: border-box;
 }
-/* up is done */
+
 .navigationItem a {
     color: #8F5C2C;
     text-decoration: none;
@@ -12,17 +12,14 @@
     box-sizing: border-box;
     display: block;
 }
-/* up is done */
+
 .navigationItem a:hover,
 .navigationItem a:active,
 .navigationItem a.active {
     color: #40A4C8;
 }
-/* up is done */
-
 
 @media (min-width: 500px) {
-
     .navigationItem {
         display: flex;
         justify-content: space-around;
@@ -39,6 +36,7 @@
         padding: 0px 10px;
         border-bottom: 4px solid transparent;
     }
+    
     .navigationItem a:hover,
     .navigationItem a:active,
     .navigationItem a.active {
@@ -47,5 +45,4 @@
         background-color: #8F5C2C;
         box-sizing: border-box;
     }
-
 }
