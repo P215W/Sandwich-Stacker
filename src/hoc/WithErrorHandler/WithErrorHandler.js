@@ -4,23 +4,23 @@ import Modal from "../../components/UI/Modal/Modal";
 
 const withErrorHandler = (Comp, axios) => {
     return class extends Component {
+        constructor(props) {
+            super();
+            this.state = {
+                error: null
+            };
 
-        state = {
-            error: null
-        };
-
-        componentDidMount () {
-            console.log("didUpdate is here");
-            axios.interceptors.request.use(req => {
-                this.setState({error: null});
-                return req;
-            });
-            axios.interceptors.response.use(res => res, err => {
-                console.log("Error: ", err);
-                this.setState({error: err});
-                return err;
-            });
-        };
+                console.log("ist cool");
+                axios.interceptors.request.use(req => {
+                    this.setState({error: null});
+                    return req;
+                });
+                axios.interceptors.response.use(res => res, err => {
+                    console.log("Error: ", err);
+                    this.setState({error: err});
+                    // return err;
+                });
+        }
 
         confirmErrorHandler = () => {
             this.setState({error: null});

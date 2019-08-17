@@ -7,7 +7,7 @@ import OrderSummary from "../../components/Sandwich/OrderSummary/OrderSummary";
 import Spinner from "../../components/UI/Spinner/Spinner";  // until here: test if spinner works if loadng is set to true (frist as  test, then by the continue method) 
 import styles from "./SandwichBuilder.module.css";
 import axios from "../../axios-order";
-import withErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler";
+import withErrorHandler from "../../hoc/withErrorHandler/withErrorHandler";
 
 const INGREDIENT_PRICE = {
   friedEgg: 0.5,
@@ -22,22 +22,34 @@ const INGREDIENT_PRICE = {
 
 class SandwichBuilder extends Component {
   state = {
-    ingredients: {
+    ingredients: null, 
       //   8 ingredient types
-      friedEgg: 0,
-      tomato: 0,
-      pickle: 0,
-      lettuce: 1,
-      cucumber: 1,
-      bacon: 1,
-      cheese: 1,
-      turkey: 1
-    },
+      // { friedEgg: 0,
+      // tomato: 0,
+      // pickle: 0,
+      // lettuce: 1,
+      // cucumber: 1,
+      // bacon: 1,
+      // cheese: 1,
+      // turkey: 1
+    // },
     totalPrice: 8,
     purchasable: true,
     purchasing: false,
     loading: false,
-    error: null
+    error: false
+  };
+
+  componentDidMount () {
+    console.log("Marc");
+    axios.get("/ingredients.json")
+      .then(res => {
+        this.setState({ingredients: res.data});
+      })
+      .catch(err => {
+        console.log("fehle, du cooler Typ");
+        this.setState({error: true});
+      });
   };
 
   checkPurchasability = updIngredients => {
@@ -136,14 +148,32 @@ class SandwichBuilder extends Component {
       disabledInfo[ing] = disabledInfo[ing] <= 0;
     }
 
-    let orderSummary = (
-      <OrderSummary
-        ingredients={this.state.ingredients}
-        totalPrice={this.state.totalPrice}
-        backdropHandler={this.backdropHandler}
-        continueHandler={this.continueHandler}
-    />
-    );
+    let sandwich = this.state.error ? <p>We are sorry, ingredients can't be loaded at the moment.</p> : <Spinner />;
+    let orderSummary = null;
+
+    if (this.state.ingredients) {
+      sandwich = (
+        <Auxiliary>
+          <Sandwich ingredients={this.state.ingredients} />
+          <BuildControls
+            price={this.state.totalPrice}
+            addIngredient={this.addIngredientHandler}
+            removeIngredient={this.removeIngredientHandler}
+            isDisabled={disabledInfo}
+            purchasable={this.state.purchasable}
+            purchasing={this.purchasingHandler}
+          />
+        </Auxiliary>
+      );
+      orderSummary = (
+        <OrderSummary
+          ingredients={this.state.ingredients}
+          totalPrice={this.state.totalPrice}
+          backdropHandler={this.backdropHandler}
+          continueHandler={this.continueHandler} />
+      );
+    }
+
     if (this.state.loading) {
       orderSummary = <Spinner />;
     }
@@ -158,19 +188,11 @@ class SandwichBuilder extends Component {
           {orderSummary}
         </Modal>
         <div className={styles.main}>
-          <Sandwich ingredients={this.state.ingredients} />
-          <BuildControls
-            price={this.state.totalPrice}
-            addIngredient={this.addIngredientHandler}
-            removeIngredient={this.removeIngredientHandler}
-            isDisabled={disabledInfo}
-            purchasable={this.state.purchasable}
-            purchasing={this.purchasingHandler}
-          />
+          {sandwich}
         </div>
       </Auxiliary>
     );
-  }
-}
+  };
+};
 
 export default withErrorHandler(SandwichBuilder, axios);
