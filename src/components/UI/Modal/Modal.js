@@ -8,20 +8,21 @@ import Auxiliary from "../../../hoc/Auxiliary/Auxiliary";
 class Modal extends Component {
 
     shouldComponentUpdate (nextProps, nextState) {
-        return nextProps.purchasing !== this.props.purchasing;
+        return nextProps.show !== this.props.show || nextProps.loading !== this.props.loading;
     }
 
     render() {
         return (
             <Auxiliary>
-                <Backdrop doesModalShow={this.props.purchasing} clicked={this.props.backdropHandler} />
+                <Backdrop doesModalShow={this.props.show} clicked={this.props.backdropHandler} />
                 <div 
                     className={styles.modal}
                     style={{
-                        transform: this.props.purchasing ? "translate(0)" : "translateY(-200vH)",
-                        opacity: this.props.purchasing ? "1" :"0"
-                    }}>
-                    {this.props.children}
+                        transform: this.props.show ? "translate(0)" : "translateY(-200vH)",
+                        opacity: this.props.show ? "1" :"0"
+                    }}
+                >
+                    {this.props.show ? this.props.children : null}
                 </div>
             </Auxiliary>
         );

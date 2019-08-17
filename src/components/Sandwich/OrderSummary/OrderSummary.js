@@ -15,7 +15,7 @@ const orderSummary = props => {
             <p>Total price: {props.totalPrice.toFixed(2)}</p>
             <p>Proceed to checkout?</p>
             <div className={styles.buttons}>
-                <Button btnType="success" clicked={props.backdropHandler}>Continue</Button>
+                <Button btnType="success" clicked={props.continueHandler}>Continue</Button>
                 <Button btnType="danger" clicked={props.backdropHandler}>Cancel</Button>
             </div>
         </div>
