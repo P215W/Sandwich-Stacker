@@ -6,20 +6,24 @@ const withErrorHandler = (Comp, axios) => {
     return class extends Component {
         constructor(props) {
             super();
+
             this.state = {
                 error: null
             };
 
-                console.log("ist cool");
-                axios.interceptors.request.use(req => {
-                    this.setState({error: null});
-                    return req;
-                });
-                axios.interceptors.response.use(res => res, err => {
-                    console.log("Error: ", err);
-                    this.setState({error: err});
-                    // return err;
-                });
+            this.reqInterceptor = axios.interceptors.request.use(req => {
+                this.setState({error: null});
+                return req;
+            });
+            this.resInterceptor = axios.interceptors.response.use(res => res, err => {
+                this.setState({error: err});
+                // return err;
+            });
+        }
+
+        componentWillUnmount () {
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         confirmErrorHandler = () => {

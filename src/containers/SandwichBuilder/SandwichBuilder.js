@@ -41,13 +41,11 @@ class SandwichBuilder extends Component {
   };
 
   componentDidMount () {
-    console.log("Marc");
     axios.get("/ingredients.json")
       .then(res => {
         this.setState({ingredients: res.data});
       })
       .catch(err => {
-        console.log("fehle, du cooler Typ");
         this.setState({error: true});
       });
   };
@@ -112,32 +110,53 @@ class SandwichBuilder extends Component {
 
   
   continueHandler = () => {
-    this.setState({
-      loading: true
-    });
-    const order = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: "Test Name",
-        adress: {
-          street: "Teststreet 1",
-          zipcode: 12345,
-          country: "Belgium"
-        },
-        email: "test@test.com"
-      }
-    };
-    axios.post("/orders.json", order)
-      .then(res => {
-        console.log(res);
-        this.setState({ loading: false, purchasing: false });
-      });
+    // this.setState({
+    //   loading: true
+    // });
+    // const order = {
+    //   ingredients: this.state.ingredients,
+    //   price: this.state.totalPrice,
+    //   customer: {
+    //     name: "Test Name",
+    //     adress: {
+    //       street: "Teststreet 1",
+    //       zipcode: 12345,
+    //       country: "Belgium"
+    //     },
+    //     email: "test@test.com"
+    //   }
+    // };
+    // axios.post("/orders.json", order)
+    //   .then(res => {
+    //     console.log(res);
+    //     this.setState({ loading: false, purchasing: false });
+    //   });
+
     //   .catch(err => {
     //     this.setState({ loading: false, purchasing: false });
     // });
     // example for deletion
     // axios.delete("/orders/-LmT0URTMXITlDZIoT6l.json");
+
+    // this.props.history.push("/checkout");
+
+    const query = [];
+    for (let i in this.state.ingredients) {
+      // salad: 1
+      let data = encodeURIComponent(i) + "=" + encodeURIComponent(this.state.ingredients[i]);
+      // let data = i + "=" + this.state.ingredients[i];
+      query.push(data);
+    }
+    query.push("totalPrice=" + this.state.totalPrice);
+    console.log("query: ", query);
+    const queryString = query.join("&");
+    console.log("queryString: ", queryString);
+
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString
+    });
+    
   };
 
   render() {

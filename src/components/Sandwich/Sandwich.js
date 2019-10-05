@@ -3,7 +3,7 @@ import styles from "./Sandwich.module.css";
 import SandwichIngredient from "../SandwichIngredient/SandwichIngredient";
 
 const sandwich = props => {
-
+    
     const transformedIngredients = Object.keys(props.ingredients)
         .map(ing => {
             return [...Array(props.ingredients[ing])].map((_, index) => {
